@@ -7,13 +7,9 @@ This repository provides a digital signal processing (DSP) framework that utiliz
 ## Overview
 ![Pipeline Diagram](assets/workflow.svg)
 
-1. Preprocessing: Standardized BAM/BED processing to filter fragments (20–600 bp, MAPQ ≥ 30).
-2. Feature Extraction: Calculation of 5' end-motif frequencies for k = 4, 5, and 6.
-3. Spectral Transformation: Z-score standardization and Softmax mapping followed by FFT to extract amplitude spectra.
-4. Classification: Training of SVM base learners on spectral features and final prediction via a meta-classifier.
-
-## Project Structure
-
+1. Feature Extraction: Calculation of 5' end-motif frequencies for k = 4, 5, and 6.
+2. Spectral Transformation: Z-score standardization and Softmax mapping followed by FFT to extract amplitude spectra.
+3. Classification: Training of SVM base learners on spectral features and final prediction via a meta-classifier.
 
 ## Installation
 We recommend using Conda to manage the environment.
