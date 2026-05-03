@@ -1,15 +1,15 @@
 # DFT_code
-Amplifying Pathological Signals in cfDNA End-Motif Profiles via Discrete Fourier Transform
+Frequency-Domain Transformation of cfDNA End-Motif Pro-files Enhances Cross-Cohort Cancer Detection
 
 ## Description
-This repository provides a digital signal processing (DSP) framework that utilizes the **Discrete Fourier Transform (DFT)** to amplify subtle **pathological signals** within cell-free DNA (cfDNA) end-motif (EDM) profiles. By treating k-mer frequency distributions as discrete signals, this method extracts frequency-domain amplitude spectra to unmask tumor-derived perturbations often submerged by dominant hematopoietic backgrounds.
+This repository provides a DFT-based frequency-domain framework to improve the separability of pathological signals in cfDNA end-motif (EDM) profiles.
 
 ## Overview
-![Pipeline Diagram](assets/workflow.svg)
+![Pipeline Diagram](assets/workflow.png)
 
 1. Feature Extraction: Calculation of 5' end-motif frequencies for k = 4, 5, and 6.
 2. Spectral Transformation: Z-score standardization and Softmax mapping followed by FFT to extract amplitude spectra.
-3. Classification: Training of SVM base learners on spectral features and final prediction via a meta-classifier.
+3. Classification: Training base learners on spectral features and final prediction via a meta-classifier.
 
 ## Installation
 We recommend using Conda to manage the environment.
