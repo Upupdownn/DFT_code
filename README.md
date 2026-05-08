@@ -1,5 +1,5 @@
 # DFT_code
-Frequency-Domain Transformation of cfDNA End-Motif Pro-files Enhances Cross-Cohort Cancer Detection
+Frequency-Domain Transformation of cfDNA End-Motif Profiles Enhances Cross-Cohort Cancer Detection
 
 ## Description
 This repository provides a DFT-based frequency-domain framework to improve the separability of pathological signals in cfDNA end-motif (EDM) profiles.
