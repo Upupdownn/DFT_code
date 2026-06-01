@@ -1,3 +1,5 @@
 examples/out_dir/
 /ignore/
 hg19.2bit
+scripts/utils/__pycache__
+examples/ESM/result

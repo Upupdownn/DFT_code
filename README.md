@@ -86,6 +86,58 @@ wget http://hgdownload.cse.ucsc.edu/goldenPath/hg19/bigZips/hg19.2bit
 ### Notes
 All scripts can be used with the `-h/--help` option to view their help documentation.
 
+### ESM Workflow Example
+We provide a toy dataset for testing the ESM pipeline in examples/ESM/. This example can be used to verify that the environment and scripts are installed correctly before running your own analysis.
+
+#### Input requirements
+The ESM workflow is designed as a general multi-scale ensemble framework and is not limited to EDM features in this study. It can be applied to any multi-scale feature set.
+
+To run the workflow, the following requirements should be met:
+* Feature directories
+  * `cv_feature_dir`: directory containing feature matrices for cross-validation
+  * `val_feature_dir (optional)`: directory containing feature matrices for external validation
+* Matched scales
+  * `cv` and `val` directories must contain the **same number of feature files**
+  * corresponding files must have **identical filenames**, so that each scale can be matched correctly
+* Info files
+  * `cv_info.tsv` is required
+  * `val_info.tsv` is optional
+  * each info file should contain:
+    * sample ID as index
+    * `label` column indicating sample class (e.g. 0 / 1)
+* Validation set
+  * `val` data are optional
+  * the ESM model can be trained using only the `cv` dataset
+
+#### Run the example
+
+Using the provided example dataset:
+```bash
+python scripts/core/run_ESM.py \
+  examples/ESM/cv_features/ \
+  examples/ESM/cv_info.tsv \
+  examples/ESM/result/esm_cv_score.tsv \
+  --val_feature_dir examples/ESM/val_features/ \
+  --val_info_tsv examples/ESM/val_info.tsv \
+  --val_score_tsv examples/ESM/result/esm_val_score.tsv
+```
+
+#### Output
+
+The output score file contains:
+
+* `sample` — sample identifier
+* `score` — predicted ESM score
+
+Example:
+```text
+sample    score
+Sample_1   0.8732
+Sample_2   0.2145
+...
+```
+You may also build your own ESM model starting from raw alignment data by following the workflow described follow:
+
 ### Step 1. Convert BAM to Fragment TSV
 Convert paired-end BAM files into fragment-level TSV format.
 ```bash
