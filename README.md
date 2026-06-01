@@ -8,7 +8,7 @@ This repository provides code and example workflows for frequency-domain transfo
 ![Pipeline Diagram](assets/workflow.png)
 
 1. Feature Extraction: Calculation of 5' end-motif frequencies for k = 4, 5, and 6.
-2. Spectral Transformation: Z-score standardization and Softmax mapping followed by FFT to extract amplitude spectra.
+2. Spectral Transformation: Z-score standardization and Softmax mapping followed by DFT to extract amplitude spectra.
 3. Classification: Training base learners on spectral features and final prediction via a meta-classifier.
 
 ## Repository Structure

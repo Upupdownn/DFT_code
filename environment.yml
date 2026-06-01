@@ -1,21 +1,40 @@
 name: dft_analysis
+
 channels:
-  - bioconda
   - conda-forge
+  - bioconda
   - defaults
+
 dependencies:
   - python=3.10
   - pip
-  - numpy>=2.1
+
+  - numpy>=1.26
   - pandas>=2.2
-  - scipy>=1.15
+  - scipy>=1.14
   - scikit-learn>=1.6
-  - statsmodels
-  - py2bit>=0.3.3
-  - pysam>=0.23.0
-  - tqdm
-  - matplotlib>=3.10
+  - statsmodels>=0.14
+
+  - pysam>=0.22
+  - py2bit>=0.3
+
+  - matplotlib>=3.8
   - seaborn>=0.13
-  - adjusttext
+  - adjusttext>=1.0
+
+  - pywavelets>=1.5
+
+  - tqdm
   - joblib
   - psutil
+
+  - r-base>=4.3
+  - r-dplyr
+  - r-ggplot2
+  - r-readr
+
+  - bioconductor-clusterprofiler
+  - bioconductor-org.hs.eg.db
+  - bioconductor-enrichplot
+  - bioconductor-go.db
+  - bioconductor-qvalue
