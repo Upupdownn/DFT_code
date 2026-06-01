@@ -3,9 +3,7 @@
 Merge individual sample EDM feature files into a single matrix.
 
 Input: Directory containing one TSV file per sample (k-mer frequencies)
-Output:
-  - Merged feature matrix (samples x k-mers)
-  - Optional: Motif Diversity Score (MDS) for each sample
+Output: Merged feature matrix (samples x k-mers)
 """
 
 import argparse
@@ -21,17 +19,9 @@ logger = logging.getLogger(__name__)
 def parse_args():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
     parser.add_argument("input_dir", help="Directory containing per-sample End-Motif Frequency TSV files")
-    parser.add_argument("--merged_output", default=None, help="Path to save merged feature matrix (optional)")
-    parser.add_argument("--mds_output", default=None, help="Path to save Motif Diversity Score (MDS) results (optional)")
+    parser.add_argument("merged_output", help="Path to save merged feature matrix")
     return parser.parse_args()
 
-def compute_mds(x: np.ndarray):
-    """Calculate Motif Diversity Score (MDS) as normalized Shannon entropy."""
-    if x.ndim == 1: x = x.reshape((1, -1))
-    res = np.sum(-x * np.log(x, out=np.zeros_like(x), where=(x > 1e-9)), axis=1)
-    res /= np.log(x.shape[1])
-    if res.shape[0] == 1: res = res[0]
-    return res
 
 def merge_edm_features(input_dir: str, merged_output: str = None, mds_output: str = None):
     """Merge all sample EDM feature files into one matrix."""
@@ -81,13 +71,6 @@ def merge_edm_features(input_dir: str, merged_output: str = None, mds_output: st
         merged_df.to_csv(merged_output, sep='\t')
         logger.info(f"Merged feature matrix saved to: {merged_output}")
 
-    if mds_output is not None:
-        mds_scores = compute_mds(merged_df.to_numpy())
-        mds_df = pd.DataFrame({'id': sample_ids, 'MDS': mds_scores})
-        Path(mds_output).parent.mkdir(parents=True, exist_ok=True)
-        mds_df.to_csv(mds_output, sep='\t', header=True, index=False)
-        logger.info(f"MDS scores saved to: {mds_output}")
-
     logger.info(f"Completed. Total samples merged: {len(sample_ids)}")
 
     return merged_df
@@ -98,7 +81,6 @@ def main():
     merge_edm_features(
         input_dir=args.input_dir,
         merged_output=args.merged_output,
-        mds_output=args.mds_output
     )
 
 if __name__ == "__main__":
